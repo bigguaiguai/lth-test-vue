@@ -1,6 +1,7 @@
 <template>
   <div>
-    {{ msg }}1234
+    {{ msg }}
+
     <TestList :dataList="dataList" @updateList="updateList"></TestList>
   </div>
 </template>
@@ -9,7 +10,7 @@ export default {
   name: "Test1Page1",
   data() {
     return {
-      msg: "Test1 page list:",
+      msg: "check勾选传参和显示不一致问题：",
       dataList: [
         { key: "t1", checked: true, title: "t1" },
         { key: "t2", checked: false, title: "t2" },
@@ -23,6 +24,7 @@ export default {
   methods: {
     updateList(val, index, item) {
       console.log("父组件更新：", val, index, item.checked);
+      // 当第一条数据勾选时，不能勾选其他数据
       if (this.dataList[0].checked) {
         //   this.dataList[index].checked = false;
         this.$set(this.dataList[index], "checked", false);

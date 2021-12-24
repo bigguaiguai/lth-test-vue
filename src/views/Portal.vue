@@ -1,10 +1,17 @@
 <template>
-  <div style="overflow: hidden;padding: 0 20px">
+  <div
+    class="portal-box"
+    style="overflow: hidden;"
+  >
     <el-row :gutter="20">
-      <el-col v-for="item in listData" :key="item.id" :span="8">
+      <el-col
+        v-for="item in listData"
+        :key="item.id"
+        :span="8"
+      >
         <el-card
           shadow="hover"
-          class="portal-box"
+          class="portal-box-card"
           @click.native="enterPage(item.path)"
         >
           {{ item.title }}
@@ -16,8 +23,8 @@
 
 <script>
 export default {
-  name: "Home",
-  data() {
+  name: "Portal",
+  data () {
     return {
       listData: [
         {
@@ -45,7 +52,7 @@ export default {
   },
   components: {},
   methods: {
-    enterPage(path) {
+    enterPage (path) {
       this.$router.push(path);
     },
   },
@@ -54,12 +61,15 @@ export default {
 
 <style lang="less" scoped>
 .portal-box {
-  line-height: 148px;
-  text-align: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  &:hover {
-    font-size: 1.2rem;
+  padding-top: 16px;
+  &-card {
+    line-height: 148px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &:hover {
+      font-size: 1.2rem;
+    }
   }
 }
 </style>
