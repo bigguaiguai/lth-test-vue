@@ -15,7 +15,7 @@
         <el-col :span="3">可以忘记打卡</el-col>
         <el-col :span="3">每月最多三次</el-col>
         <el-col :span="3">这个月已经三次了</el-col>
-        <el-col :span="3">LTHtest &copy; 2021 版权所有 </el-col>
+        <el-col :span="3">LTHtest &copy; 2021-2022 版权所有 </el-col>
       </el-row>
     </el-footer>
   </el-container>

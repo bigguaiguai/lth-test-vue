@@ -1,7 +1,23 @@
 <template>
   <el-container class="container-box">
-    <el-header>
-      <el-button @click="openUserDrawer">新增</el-button>
+    <el-header class="flex-space-between">
+      <div>
+        用户信息
+      </div>
+      <div>
+        <el-button
+          icon="el-icon-plus"
+          size="mini"
+          @click="openUserDrawer"
+        >新增</el-button>
+        <el-button
+          icon="el-icon-search"
+          size="mini"
+          type="primary"
+          @click="getTableData"
+        >搜索</el-button>
+
+      </div>
     </el-header>
     <el-main>
       <el-table
@@ -9,6 +25,8 @@
         border
         fit
         height="100%"
+        :default-sort="{prop: 'createTime',order: 'descending'}"
+        @sort-change="handleSortChange"
       >
         <el-table-column
           type="index"
@@ -23,8 +41,41 @@
           :label="item.label"
           :min-width="item.minWidth"
           :align="item.align"
+          sortable="custom"
           show-overflow-tooltip
         >
+          <template
+            slot="header"
+            slot-scope="scope"
+          >
+            <span style="position: relative">
+              <span>
+                {{scope.column.label}}
+              </span>
+              <el-popover
+                v-if="scope.column.property === 'name' || scope.column.property === 'age' || scope.column.property === 'createTime'"
+                placement="bottom"
+                width="180"
+                trigger="click"
+                @click.stop.native
+                style="position: absolute;right: -40px;top: -2px"
+              >
+                <el-input
+                  v-if="scope.column.property === 'name' || scope.column.property === 'age'"
+                  class="header-input"
+                  size="mini"
+                  clearable
+                  v-model="searchInput"
+                  @keyup.enter.native="filterData(scope.column.property)"
+                ></el-input>
+                el-
+                <i
+                  slot="reference"
+                  class="el-icon-arrow-down"
+                ></i>
+              </el-popover>
+            </span>
+          </template>
           <template slot-scope="scope">
             <template v-if="scope.column.property === 'name'">
               <span @click="openUserDrawer(scope.row)">{{scope.row.name}}</span>
@@ -57,11 +108,13 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { api } from './api';
 export default {
   name: 'Test1Page2',
   data () {
     return {
+      searchInput: '',
       columnList: [
         {
           label: '用户名',
@@ -84,6 +137,8 @@ export default {
         },
       ],
       tableData: [],
+      orderProp: { createTime: -1 },
+      searchProp: {},
       title: 'test',
       userDrawerVisible: false,
       currentOpen: {},
@@ -96,17 +151,39 @@ export default {
     this.getTableData()
   },
   methods: {
+    filterData (property) {
+      this.searchProp = {}
+      this.searchProp[property] = this.searchInput
+      this.getTableData()
+    },
+    searchInputChange (val) {
+      this.searchProp = {
+        name: val,
+      }
+    },
+    handleSortChange ({ column, prop, order }) {
+      console.log(column, prop, order)
+      this.orderProp = {
+        [prop]: order === 'ascending' ? 1 : -1,
+      }
+      this.orderProp[prop] = order === 'ascending' ? 1 : -1;
+      this.getTableData()
+    },
     getTableData () {
       let params = {
-        search: {},
+        search: this.searchProp,
         pageSize: 10,
         pageNo: 1,
-        orderProp: '',
+        orderProp: this.orderProp,
       }
       this.$axios.post(api.getPerson, params).then(res => {
         console.log(res)
         if (res.success) {
-          this.tableData = res.result;
+          let data = res.result
+          data.forEach(item => {
+            item.createTime = moment(parseInt(item.createTime)).format('YYYY/MM/DD hh:mm:ss')
+          });
+          this.tableData = data
         }
       })
     },
@@ -137,3 +214,6 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+</style>

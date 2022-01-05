@@ -37,12 +37,27 @@ const routes = [
             name: 'Test1Page3',
             component: () => import('../views/Test1/route/Test1Page3.vue')
           },
+          {
+            path: 'nav1-page4',
+            name: 'Test1Page4',
+            component: () => import('../views/Test1/route/Test1Page4/index.vue')
+          },
           // nav2
           {
             path: 'nav2-page1',
-            name: 'Test1Todolist',
-            component: () => import('../views/Test1/route/Test1Todolist.vue')
+            name: 'Requirement',
+            component: () => import('../views/Test1/route/Requirement/index.vue')
           },
+          {
+            path: 'nav2-page2',
+            name: 'Test1Page4',
+            component: () => import('../views/Test1/route/Test1Page4.vue')
+          },
+          {
+            path: 'nav2-page3',
+            name: 'Test1Page5',
+            component: () => import('../views/Test1/route/Test1Page5/index.vue')
+          }
         ]
       },
       {

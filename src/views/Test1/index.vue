@@ -82,6 +82,10 @@ export default {
               index: "/test1/nav1-page3",
               title: "demo3",
             },
+            {
+              index: "/test1/nav1-page4",
+              title: "打字游戏",
+            },
           ],
         },
         {
@@ -91,6 +95,14 @@ export default {
           children: [
             {
               index: "/test1/nav2-page1",
+              title: "requirement",
+            },
+            {
+              index: "/test1/nav2-page2",
+              title: "vuex",
+            },
+            {
+              index: "/test1/nav2-page3",
               title: "todoList",
             },
           ],
@@ -111,4 +123,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.vertical-menu {
+  border-right: none;
+}
 </style>

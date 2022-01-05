@@ -130,7 +130,21 @@ export default {
   methods: {
     handleOpen () {
       if (this.currentOpen.name) {
-        this.userForm = { ...this.currentOpen }
+        let params = {
+          _id: this.currentOpen._id
+        };
+
+        this.$axios.post(api.getPersonDetail, params).then(res => {
+          if (res.success) {
+            const { name, age, detail } = res.result[0]
+            if (detail) {
+              const { address, height, weight, sex, tel } = detail
+              this.userForm = { address, height, weight, sex, name, age, tel }
+            } else {
+              this.userForm = { name, age }
+            }
+          }
+        })
       }
     },
     handleClose () {
