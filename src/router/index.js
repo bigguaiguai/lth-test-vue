@@ -38,11 +38,16 @@ const routes = [
             component: () => import('../views/Test1/route/Test1Page3.vue')
           },
           {
-            path: 'nav1-page4',
-            name: 'Test1Page4',
-            component: () => import('../views/Test1/route/Test1Page4/index.vue')
+            path: 'typing-game',
+            name: 'GameTyping',
+            component: () => import('../views/Test1/route/GameTyping/index.vue')
           },
           // nav2
+          {
+            path: 'requirement',
+            name: 'RequirementList',
+            component: () => import('../views/Test1/route/RequirementList/index.vue')
+          },
           {
             path: 'nav2-page1',
             name: 'Requirement',

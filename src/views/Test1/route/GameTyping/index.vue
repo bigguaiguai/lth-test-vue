@@ -25,7 +25,7 @@
           size="mini"
           type="primary"
           @click="beginGame"
-        >{{isGame ? "暂停":"开始"}}</el-button>
+        >{{"开始"}}</el-button>
       </div>
     </el-header>
     <el-main class="type-game-box">
@@ -42,9 +42,11 @@
 </template>
 
 <script>
-const allWords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const allWords = ['a', 'b', 'c', 'd', 'e', 'f',
+  'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+  'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 export default {
-  name: 'Test1Page4',
+  name: 'GameTyping',
   data () {
     return {
       level: ['general'], // 游戏难度
@@ -74,6 +76,7 @@ export default {
   watch: {
     isOver (val) { // 判断是否输了
       if (val) {
+        () => { }
         this.$message.error('你被抓住了')
         clearInterval(this.timer)
         this.isGame = false
@@ -108,6 +111,8 @@ export default {
   methods: {
     // 开始游戏
     beginGame () {
+      this.currentIndex = 0
+      this.policeIndex = -1
       this.$message.warning('快跑，3秒后警察出动')
       this.isGame = true;
       setTimeout(() => {

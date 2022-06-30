@@ -83,7 +83,7 @@ export default {
               title: "demo3",
             },
             {
-              index: "/test1/nav1-page4",
+              index: "/test1/typing-game",
               title: "打字游戏",
             },
           ],
@@ -93,6 +93,10 @@ export default {
           icon: "el-icon-menu",
           title: "计划表",
           children: [
+            {
+              index: "/test1/requirement",
+              title: "requirementList",
+            },
             {
               index: "/test1/nav2-page1",
               title: "requirement",
@@ -125,5 +129,6 @@ export default {
 <style lang="less" scoped>
 .vertical-menu {
   border-right: none;
+  overflow: visible;
 }
 </style>

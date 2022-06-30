@@ -1,6 +1,22 @@
 <template>
   <el-container class="container-box">
-    <el-header>todoList {{fuckName}}</el-header>
+    <el-header>todoList {{fuckName}}
+      <el-popover trigger="click">
+        <div>
+          <el-input placeholder=""></el-input>
+          <ul>
+            <li>12345</li>
+            <li>1234</li>
+            <li>12340</li>
+            <li>17890</li>
+          </ul>
+        </div>
+        <i
+          class="el-icon-plus"
+          slot="reference"
+        ></i>
+      </el-popover>
+    </el-header>
     <el-main style="border : 1px solid red">
       <el-table
         :data="tableData"

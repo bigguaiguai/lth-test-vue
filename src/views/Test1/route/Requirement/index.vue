@@ -107,20 +107,10 @@
                 class="requirement-box-main-degree-select"
               >
                 <el-option
-                  label="提示"
-                  value="1"
-                ></el-option>
-                <el-option
-                  label="一般"
-                  value="2"
-                ></el-option>
-                <el-option
-                  label="严重"
-                  value="3"
-                ></el-option>
-                <el-option
-                  label="致命"
-                  value="4"
+                  v-for="item in degreeList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
                 ></el-option>
               </el-select>
             </div>
@@ -207,13 +197,13 @@
             @click="submitForm"
           >创建</el-button>
         </el-form-item>
-
       </el-form>
     </el-main>
   </el-container>
 </template>
 
 <script>
+import { api } from './api.js';
 export default {
   name: 'Requirement',
   data () {
@@ -262,8 +252,25 @@ export default {
           { required: true, message: '请输入需求名称', trigger: 'blur' },
           { min: 1, max: 20, message: '长度在 1 到 50 个字符', trigger: 'blur' }
         ],
-
       },
+      degreeList: [
+        {
+          label: '提示',
+          value: '1',
+        },
+        {
+          label: '一般',
+          value: '2',
+        },
+        {
+          label: '严重',
+          value: '3',
+        },
+        {
+          label: '致命',
+          value: '4',
+        },
+      ],
       keyWordTags: [],
       inputVisible: false,
       inputValue: '',
@@ -277,6 +284,18 @@ export default {
             this.form.keywordArr = [...this.keyWordTags]
           }
           console.log(this.form, '123')
+          this.addOrUpdateRequirement(this.form)
+
+        }
+      })
+    },
+    addOrUpdateRequirement (params) {
+      let url = params._id ? api.updateRequirement : api.addRequirement
+      this.$axios.post(url, params).then(res => {
+        if (res.success) {
+          this.$message.success(res.msg)
+        } else {
+          this.$message.error(res.msg)
         }
       })
     },

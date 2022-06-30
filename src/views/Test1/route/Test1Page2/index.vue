@@ -68,7 +68,6 @@
                   v-model="searchInput"
                   @keyup.enter.native="filterData(scope.column.property)"
                 ></el-input>
-                el-
                 <i
                   slot="reference"
                   class="el-icon-arrow-down"

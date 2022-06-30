@@ -79,7 +79,7 @@ export default {
   &-left {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
   }
   &-line {
     width: 4px;
@@ -98,7 +98,7 @@ export default {
     width: 100%;
     flex: 1;
     padding-left: 12px;
-    overflow: hidden;
+    overflow: auto;
   }
 }
 </style>
